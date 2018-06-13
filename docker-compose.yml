@@ -4,6 +4,17 @@ services:
     build: ./python
     ports:
       - "5000:80"
+    tty: true
     volumes:
       - ./python/application:/usr/local/src/application
     command: "pipenv run start"
+
+  nodejs:
+    image: "node:8"
+    working_dir: /usr/local/src/application
+    ports:
+      - "5001:3000"
+    tty: true
+    volumes:
+      - ./nodejs/application:/usr/local/src/application
+    command: "npm start"
