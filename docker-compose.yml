@@ -1,0 +1,9 @@
+version: '3'
+services:
+  python:
+    build: ./python
+    ports:
+      - "5000:80"
+    volumes:
+      - ./python/application:/usr/local/src/application
+    command: "pipenv run start"

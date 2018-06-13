@@ -10,4 +10,4 @@ fi
 docker run --rm -it \
   -v $(pwd)/application:/usr/local/src/application \
   -w /usr/local/src/application \
-  ${IMAGE_NAME} "$@" \
+  ${IMAGE_NAME} "$@"
