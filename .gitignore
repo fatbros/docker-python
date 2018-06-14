@@ -103,5 +103,5 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-# docker env
-application
+# docker dev directory
+app

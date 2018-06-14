@@ -15,8 +15,8 @@ RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -
 RUN pip install pipenv
 
 # copy pipfile & pipenv install
-RUN mkdir /usr/local/src/application
-WORKDIR /usr/local/src/application
-ADD application/Pipfile .
-ADD application/Pipfile.lock .
+RUN mkdir /usr/local/src/app
+WORKDIR /usr/local/src/app
+ADD app/Pipfile .
+ADD app/Pipfile.lock .
 RUN pipenv install
