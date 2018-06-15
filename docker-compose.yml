@@ -5,13 +5,15 @@ services:
     image: python_app
     container_name: python_app
     ports:
-      - 4000:5000
+      - 5000:5000
     tty: true
     volumes:
       - ./python/app:/usr/local/src/app
-    command: pipenv run start
-    links:
-      - mongodb:mongodb
+    command: zsh -c "pipenv install && pipenv run start"
+    depends_on:
+      - mongodb
+    networks:
+      - back_driver
 
   nodejs:
     image: node:8
@@ -23,8 +25,12 @@ services:
     volumes:
       - ./nodejs/app:/usr/local/src/app
     command: npm run dev
-    links:
-      - redis:redis
+    depends_on:
+      - redis
+      - python
+    networks:
+      - back_driver
+      - front_driver
 
   mongodb:
     image: mongo:latest
@@ -35,6 +41,8 @@ services:
     ports:
       - 27017:27017
     command: mongod --smallfiles
+    networks:
+      - back_driver
 
   redis:
     image: redis:latest
@@ -42,3 +50,7 @@ services:
     ports:
       - 6379:6379
     command: redis-server --appendonly yes
+
+networks:
+  front_driver:
+  back_driver:
